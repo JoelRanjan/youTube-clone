@@ -75,3 +75,12 @@ clone to local
 open in vs
 add the repo
 commit
+
+---> react icons size can be increased by 'size={}'
+
+redux
+install @reactjs/toolkit and react-redux
+create utils file
+create store
+create slice
+add provider in app
