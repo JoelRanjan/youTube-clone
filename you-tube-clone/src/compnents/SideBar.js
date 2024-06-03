@@ -17,7 +17,7 @@ const SideBar = () => {
   const isNavTrue = useSelector((store) => store.navToggle.isNavOpen);
 
   return (
-    <div className="m-4">
+    <div className="m-4 ">
       {isNavTrue ? (
         <>
           <ul>
