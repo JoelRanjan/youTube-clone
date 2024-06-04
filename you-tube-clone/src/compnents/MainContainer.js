@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import TopButtonsContainer from "./TopButtonsContainer";
 import { youTubeVideosKey } from "../utils/constants";
 import VideoContainer from "./VideoContainer";
+import { Link } from "react-router-dom";
 
 const MainContainer = () => {
   const [mainVideoData, setMainVideoData] = useState([]);
@@ -21,7 +22,9 @@ const MainContainer = () => {
       <TopButtonsContainer />
       <div className="flex flex-wrap">
         {mainVideoData.map((eachvid) => (
-          <VideoContainer videoDetails={eachvid} />
+          <Link to={"watch?v=" + eachvid.id}>
+            <VideoContainer videoDetails={eachvid} />
+          </Link>
         ))}
       </div>
     </div>

@@ -12,6 +12,7 @@ import { BiMoviePlay } from "react-icons/bi";
 import { FaRegClock } from "react-icons/fa";
 import { AiOutlineLike } from "react-icons/ai";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 const SideBar = () => {
   const isNavTrue = useSelector((store) => store.navToggle.isNavOpen);
@@ -21,10 +22,12 @@ const SideBar = () => {
       {isNavTrue ? (
         <>
           <ul>
-            <li className="flex m-2">
-              <FaHome size={20} className="mr-3" />
-              Home
-            </li>
+            <Link to="/">
+              <li className="flex m-2">
+                <FaHome size={20} className="mr-3" />
+                Home
+              </li>
+            </Link>
             <li className="flex m-2">
               <SiYoutubeshorts size={20} className="mr-3" />
               Shorts
@@ -71,9 +74,11 @@ const SideBar = () => {
       ) : (
         <>
           <ul>
-            <li className="flex m-2">
-              <FaHome size={20} className="mr-3" />
-            </li>
+            <Link to="/">
+              <li className="flex m-2">
+                <FaHome size={20} className="mr-3" />
+              </li>
+            </Link>
             <li className="flex m-2">
               <SiYoutubeshorts size={20} className="mr-3" />
             </li>
