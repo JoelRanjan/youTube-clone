@@ -3,7 +3,6 @@ import { FaRegUserCircle } from "react-icons/fa";
 
 const VideoContainer = ({ videoDetails }) => {
   const { snippet, statistics } = videoDetails;
-  console.log(videoDetails);
   return (
     <div className="m-2 p-2 w-72 hover:shadow-lg">
       <img

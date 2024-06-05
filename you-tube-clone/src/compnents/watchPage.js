@@ -16,9 +16,7 @@ const WatchPage = () => {
     const captionsData = await fetch(
       "https://www.googleapis.com/youtube/v3/captions?videoId=dHb9rckCgSE"
     );
-    console.log(captionsData);
     const jsonData = await captionsData.json();
-    console.log(jsonData);
   };
 
   return (
