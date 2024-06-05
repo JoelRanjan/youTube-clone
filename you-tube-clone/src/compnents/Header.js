@@ -4,10 +4,9 @@ import { SlMagnifier } from "react-icons/sl";
 import { RiVideoAddLine } from "react-icons/ri";
 import { IoIosNotificationsOutline } from "react-icons/io";
 import { FaRegUserCircle } from "react-icons/fa";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { toggleNav } from "../utils/navSlice";
 import { YOUTUBE_SEARCH_API } from "../utils/constants";
-import { addCache } from "../utils/cacheSlice";
 
 function Header() {
   const [searchValue, setSearchValue] = useState("");
@@ -20,27 +19,24 @@ function Header() {
     dispatch(toggleNav());
   };
 
-  useEffect(() => {
-    const timer = setTimeout(() => getSuggestions(), 200);
-
-    return () => clearTimeout(timer);
-  }, [searchValue]);
-
   const getSuggestions = async () => {
     const data = await fetch(YOUTUBE_SEARCH_API + searchValue);
     const jsonData = await data.json();
     setSearchSuggestions(jsonData[1]);
   };
 
+  useEffect(() => {
+    const timer = setTimeout(() => getSuggestions(), 200);
+
+    return () => clearTimeout(timer);
+  }, [searchValue]);
+
   const onSearch = (event) => {
-    // const cacheDetails = useSelector((store) => store.cache.content);
-    // if(cacheDetails.includes())
     setSearchValue(event.target.value);
-    // const cacheDetails = useSelector(store => store.cache)
   };
 
   return (
-    <div className="flex justify-between shadow-lg">
+    <div className="flex justify-between shadow-lg bg-white w-full">
       <div className="flex m-4">
         <FiAlignJustify size={30} onClick={toggleBar} />
         <img
@@ -57,7 +53,6 @@ function Header() {
             placeholder="  Search"
             value={searchValue}
             onChange={onSearch}
-            // onChange={(e) => {setSearchValue(e.target.value);dispatch(addCache())}}
             onFocus={() => setShowSuggestions(true)}
             onBlur={() => setShowSuggestions(false)}
           />
