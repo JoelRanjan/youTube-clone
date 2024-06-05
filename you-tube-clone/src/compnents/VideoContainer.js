@@ -17,9 +17,13 @@ const VideoContainer = ({ videoDetails }) => {
         <div className="ml-3 ">
           <h1 className="font-semibold ">{snippet.title}</h1>
           <h2 className="text-slate-600 text-sm">{snippet.channelTitle}</h2>
-          <p className="text-slate-600 text-sm">
-            {Math.floor(statistics?.viewCount / 1000000)}M Views
-          </p>
+          {statistics ? (
+            <p className="text-slate-600 text-sm">
+              {Math.floor(statistics?.viewCount / 1000000)}M Views
+            </p>
+          ) : (
+            ""
+          )}
         </div>
       </div>
     </div>

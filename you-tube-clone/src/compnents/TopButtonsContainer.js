@@ -1,5 +1,7 @@
 import React from "react";
 import Button from "./Button";
+import { useDispatch } from "react-redux";
+import { searchString } from "../utils/searchSlice";
 
 const TopButtonsContainer = () => {
   const buttonsList = [
@@ -16,10 +18,17 @@ const TopButtonsContainer = () => {
     "Trailers",
     "TV Shows",
   ];
+  const dispatch = useDispatch();
+
+  const searchItem = (item) => {
+    dispatch(searchString(item));
+  };
   return (
     <div className="flex">
       {buttonsList.map((eachButton) => (
-        <Button name={eachButton} />
+        <button onClick={() => searchItem(eachButton)}>
+          <Button name={eachButton} />{" "}
+        </button>
       ))}
     </div>
   );

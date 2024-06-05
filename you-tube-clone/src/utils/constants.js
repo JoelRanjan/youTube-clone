@@ -14,4 +14,4 @@ export const youTubeComments =
   "https://www.googleapis.com/youtube/v3/commentThreads?part=snippet%2Creplies&videoId=";
 
 export const youTubeSearchData =
-  "https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=50&q="; //surfing&key=[YOUR_API_KEY]"
+  "https://youtube.googleapis.com/youtube/v3/search?part=snippet&type=video&maxResults=50&q="; //surfing&key=[YOUR_API_KEY]"

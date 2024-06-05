@@ -7,10 +7,11 @@ import { FaRegUserCircle } from "react-icons/fa";
 import { useDispatch } from "react-redux";
 import { toggleNav } from "../utils/navSlice";
 import { YOUTUBE_SEARCH_API } from "../utils/constants";
+import { searchString } from "../utils/searchSlice";
 
 function Header() {
   const [searchValue, setSearchValue] = useState("");
-  const [showSuggestions, setShowSuggestions] = useState(false);
+  const [showSuggestions, setShowSuggestions] = useState(true);
   const [searchSuggestions, setSearchSuggestions] = useState([]);
 
   const dispatch = useDispatch();
@@ -35,6 +36,13 @@ function Header() {
     setSearchValue(event.target.value);
   };
 
+  const searchInput = (eachSug) => {
+    // console.log("eachSug");
+    dispatch(searchString(eachSug));
+    setShowSuggestions(false);
+    setSearchValue("");
+  };
+
   return (
     <div className="flex justify-between shadow-lg bg-white w-full">
       <div className="flex m-4">
@@ -54,7 +62,7 @@ function Header() {
             value={searchValue}
             onChange={onSearch}
             onFocus={() => setShowSuggestions(true)}
-            onBlur={() => setShowSuggestions(false)}
+            // onBlur={() => setShowSuggestions(false)}
           />
           <SlMagnifier
             size={30}
@@ -65,10 +73,13 @@ function Header() {
           <ul>
             {showSuggestions &&
               searchSuggestions.map((eachSug) => (
-                <li className="flex">
+                <button
+                  className="flex hover:bg-slate-200"
+                  onClick={() => searchInput(eachSug)}
+                >
                   <SlMagnifier size={20} className="w-14  p-1" />
                   {eachSug}
-                </li>
+                </button>
               ))}
           </ul>
         </div>

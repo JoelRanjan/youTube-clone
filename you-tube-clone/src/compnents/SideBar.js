@@ -11,11 +11,18 @@ import {
 import { BiMoviePlay } from "react-icons/bi";
 import { FaRegClock } from "react-icons/fa";
 import { AiOutlineLike } from "react-icons/ai";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { searchString } from "../utils/searchSlice";
 
 const SideBar = () => {
   const isNavTrue = useSelector((store) => store.navToggle.isNavOpen);
+
+  const dispatch = useDispatch();
+
+  const setHome = () => {
+    dispatch(searchString(""));
+  };
 
   return (
     <div className="m-4 ">
@@ -23,7 +30,7 @@ const SideBar = () => {
         <>
           <ul>
             <Link to="/">
-              <li className="flex m-2">
+              <li className="flex m-2" onClick={setHome}>
                 <FaHome size={20} className="mr-3" />
                 Home
               </li>
@@ -75,7 +82,7 @@ const SideBar = () => {
         <>
           <ul>
             <Link to="/">
-              <li className="flex m-2">
+              <li className="flex m-2" onClick={setHome}>
                 <FaHome size={20} className="mr-3" />
               </li>
             </Link>
