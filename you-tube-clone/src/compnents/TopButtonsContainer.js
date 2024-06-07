@@ -9,7 +9,7 @@ const TopButtonsContainer = () => {
     "Music",
     "Cricket",
     "Cinemas",
-    "Sketch Comedy",
+    "youTube shorts",
     "Web Development",
     "News",
     "Movies",

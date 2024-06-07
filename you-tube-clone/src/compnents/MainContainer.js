@@ -8,10 +8,11 @@ import {
 import VideoContainer from "./VideoContainer";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-import searchSlice from "../utils/searchSlice";
+import MainShimmerUi from "./MainShimmerUi";
 
 const MainContainer = () => {
   const [mainVideoData, setMainVideoData] = useState([]);
+  const [showShimmer, setShowShimmer] = useState(false);
 
   const searchString = useSelector((store) => store.searchStr.str);
 
@@ -24,18 +25,27 @@ const MainContainer = () => {
   }, [searchString]);
 
   const getVideos = async () => {
+    setShowShimmer(true);
     const videoData = await fetch(youTubeVideosKey);
     const jsonData = await videoData.json();
+    console.log(jsonData);
+    setShowShimmer(false);
     setMainVideoData(jsonData.items);
   };
 
   const getVideosOnInput = async () => {
+    setShowShimmer(true);
     const videosDataOnInput = await fetch(
       youTubeSearchData + searchString + "&key=" + YOUR_API_KEY
     );
     const jsonDataOnInput = await videosDataOnInput.json();
+    setShowShimmer(false);
     setMainVideoData(jsonDataOnInput.items);
   };
+
+  if (showShimmer) {
+    return <MainShimmerUi />;
+  }
 
   return (
     <div>

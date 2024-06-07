@@ -24,6 +24,10 @@ const SideBar = () => {
     dispatch(searchString(""));
   };
 
+  const showShorts = () => {
+    dispatch(searchString("youtube shorts"));
+  };
+
   return (
     <div className="m-4 ">
       {isNavTrue ? (
@@ -35,7 +39,7 @@ const SideBar = () => {
                 Home
               </li>
             </Link>
-            <li className="flex m-2">
+            <li className="flex m-2 cursor-pointer" onClick={showShorts}>
               <SiYoutubeshorts size={20} className="mr-3" />
               Shorts
             </li>
@@ -86,7 +90,7 @@ const SideBar = () => {
                 <FaHome size={20} className="mr-3" />
               </li>
             </Link>
-            <li className="flex m-2">
+            <li className="flex m-2" onClick={setHome}>
               <SiYoutubeshorts size={20} className="mr-3" />
             </li>
             <li className="flex m-2">

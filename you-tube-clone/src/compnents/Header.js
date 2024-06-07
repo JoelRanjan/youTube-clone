@@ -8,6 +8,7 @@ import { useDispatch } from "react-redux";
 import { toggleNav } from "../utils/navSlice";
 import { YOUTUBE_SEARCH_API } from "../utils/constants";
 import { searchString } from "../utils/searchSlice";
+import { Link } from "react-router-dom";
 
 function Header() {
   const [searchValue, setSearchValue] = useState("");
