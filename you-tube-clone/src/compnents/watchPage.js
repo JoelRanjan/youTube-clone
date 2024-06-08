@@ -20,6 +20,7 @@ import { youtubeVideoCategoryById } from "../utils/constants";
 import { Link } from "react-router-dom";
 import VideoSuggestions from "./VideoSuggestions";
 import { addToWatchList } from "../utils/watchListSlice";
+import Popup from "reactjs-popup";
 
 const WatchPage = () => {
   const [captionData, setCaptionData] = useState("");
@@ -138,20 +139,32 @@ const WatchPage = () => {
               <SlDislike size={20} className=" mx-3" />
             </div>
             <div className="flex bg-slate-200 rounded-xl px-2 ml-3 pt-1">
-              <PiShareFat size={20} /> <p className="ml-2">More options</p>
+              <PiShareFat size={20} />
+              <Popup
+                trigger={<p className="ml-2">More options</p>}
+                position="right center"
+              >
+                <ul className="text-xs  bg-slate-200 rounded-l px-2 ml-3 pt-1">
+                  <li className="cursor-pointer" onClick={addToWatch}>
+                    <button>{"->"} Add to Watchlist</button>
+                  </li>
+                  <li className="cursor-pointer">{"->"} Add to My Videos</li>
+                  {/* <li>Add to My Movies</li> */}
+                </ul>
+              </Popup>
             </div>
             {/* <div className="flex bg-slate-200 rounded-xl px-2 ml-3 pt-1">
               <LuArrowDownToLine size={20} /> <p className="ml-2">Download</p>
             </div> */}
-            <div>
+            {/* <div>
               <ul className="text-xs  bg-slate-200 rounded-xl px-2 ml-3 pt-1">
                 <li className="cursor-pointer" onClick={addToWatch}>
                   {"->"} Add to Watchlist
                 </li>
                 <li className="cursor-pointer">{"->"} Add to My Videos</li>
-                {/* <li>Add to My Movies</li> */}
+                
               </ul>
-            </div>
+            </div> */}
           </div>
         </div>
         <div className="mt-4">
