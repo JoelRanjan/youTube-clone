@@ -21,3 +21,6 @@ export const youtubeVideoCategoryById =
 
 export const youtubeShorts =
   "https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&maxResults=13&regionCode=IN&videoCategoryId=24"; //key=";
+
+export const videoDataById =
+  "https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&id=";

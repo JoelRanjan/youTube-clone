@@ -17,6 +17,9 @@ import { searchString } from "../utils/searchSlice";
 
 const SideBar = () => {
   const isNavTrue = useSelector((store) => store.navToggle.isNavOpen);
+  const watchListItems = useSelector(
+    (store) => store.watchVideos.watchListVideos
+  );
 
   const dispatch = useDispatch();
 
@@ -71,10 +74,12 @@ const SideBar = () => {
               <BiMoviePlay size={20} className="mr-3" />
               Your Movies
             </li>
-            <li className="flex m-2">
-              <FaRegClock size={20} className="mr-3" />
-              Watch Later
-            </li>
+            <Link to="/watchList">
+              <li className="flex m-2 cursor-pointer">
+                <FaRegClock size={20} className="mr-3" />
+                Watch Later<p className="text-xs">({watchListItems.length})</p>
+              </li>
+            </Link>
             <li className="flex m-2">
               <AiOutlineLike size={20} className="mr-3" />
               Liked Videos

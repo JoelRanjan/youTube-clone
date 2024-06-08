@@ -1,23 +1,25 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useSearchParams } from "react-router-dom";
 import { closeNav } from "../utils/navSlice";
 import {
   youTubeDataById,
   YOUR_API_KEY,
   youTubeComments,
+  videoDataById,
 } from "../utils/constants";
 import { FaRegUserCircle } from "react-icons/fa";
 import { FaBell } from "react-icons/fa";
 import { SlLike } from "react-icons/sl";
 import { SlDislike } from "react-icons/sl";
 import { PiShareFat } from "react-icons/pi";
-import { LuArrowDownToLine } from "react-icons/lu";
+// import { LuArrowDownToLine } from "react-icons/lu";
 import Comment from "./Comment";
 import VideoShimmerUi from "./videoShimmerUi";
 import { youtubeVideoCategoryById } from "../utils/constants";
 import { Link } from "react-router-dom";
 import VideoSuggestions from "./VideoSuggestions";
+import { addToWatchList } from "../utils/watchListSlice";
 
 const WatchPage = () => {
   const [captionData, setCaptionData] = useState("");
@@ -27,6 +29,8 @@ const WatchPage = () => {
   const [categoryVideoData, setCategoryVideoData] = useState([]);
   const [searchParams] = useSearchParams();
   const dispatch = useDispatch();
+
+  const watchList = useSelector((store) => store.watchVideos.watchListVideos);
 
   useEffect(() => {
     dispatch(closeNav());
@@ -66,6 +70,22 @@ const WatchPage = () => {
     );
     const suggData = await suggestionsData.json();
     setCategoryVideoData(suggData.items);
+  };
+
+  const addToWatch = async () => {
+    const watchData = await fetch(
+      videoDataById + searchParams.get("v") + "&key=" + YOUR_API_KEY
+    );
+    const watchJsonData = await watchData.json();
+    const similarData = watchList.filter(
+      (item) => item.snippet.title === captionData?.snippet?.title
+    );
+    if (similarData.length === 0) {
+      dispatch(addToWatchList(watchJsonData.items));
+      alert("Added to watchlist");
+    } else {
+      alert("Already added");
+    }
   };
 
   if (showWatchShimmer) {
@@ -118,10 +138,19 @@ const WatchPage = () => {
               <SlDislike size={20} className=" mx-3" />
             </div>
             <div className="flex bg-slate-200 rounded-xl px-2 ml-3 pt-1">
-              <PiShareFat size={20} /> <p className="ml-2">Share</p>
+              <PiShareFat size={20} /> <p className="ml-2">More options</p>
             </div>
-            <div className="flex bg-slate-200 rounded-xl px-2 ml-3 pt-1">
+            {/* <div className="flex bg-slate-200 rounded-xl px-2 ml-3 pt-1">
               <LuArrowDownToLine size={20} /> <p className="ml-2">Download</p>
+            </div> */}
+            <div>
+              <ul className="text-xs  bg-slate-200 rounded-xl px-2 ml-3 pt-1">
+                <li className="cursor-pointer" onClick={addToWatch}>
+                  {"->"} Add to Watchlist
+                </li>
+                <li className="cursor-pointer">{"->"} Add to My Videos</li>
+                {/* <li>Add to My Movies</li> */}
+              </ul>
             </div>
           </div>
         </div>
