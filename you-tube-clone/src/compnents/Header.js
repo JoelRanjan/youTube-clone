@@ -45,7 +45,7 @@ function Header() {
   };
 
   return (
-    <div className="flex justify-between shadow-lg bg-white w-full">
+    <div className="flex justify-between shadow-lg bg-white w-full sticky top-0">
       <div className="flex m-4">
         <FiAlignJustify size={30} onClick={toggleBar} />
         <img

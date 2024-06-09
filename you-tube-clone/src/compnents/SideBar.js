@@ -32,7 +32,7 @@ const SideBar = () => {
   };
 
   return (
-    <div className="m-4 ">
+    <div className="m-4 mt-6 sticky top-14">
       {isNavTrue ? (
         <>
           <ul>
