@@ -21,6 +21,8 @@ import { Link } from "react-router-dom";
 import VideoSuggestions from "./VideoSuggestions";
 import { addToWatchList } from "../utils/watchListSlice";
 import Popup from "reactjs-popup";
+import { addComment, updateComment } from "../utils/commentsSlice";
+import NewComment from "./NewComment";
 
 const WatchPage = () => {
   const [captionData, setCaptionData] = useState("");
@@ -28,10 +30,24 @@ const WatchPage = () => {
   const [showWatchShimmer, setShowWatchShimmer] = useState(false);
   const [catId, setCatId] = useState("");
   const [categoryVideoData, setCategoryVideoData] = useState([]);
+  const [userComment, setUserComment] = useState("");
+  const [commentId, setCommentId] = useState(null);
   const [searchParams] = useSearchParams();
   const dispatch = useDispatch();
 
   const watchList = useSelector((store) => store.watchVideos.watchListVideos);
+  const commentsList = useSelector((store) => store.comments.comments);
+
+  useEffect(() => {
+    if (commentsList.length > 0) {
+      const getCommentId = commentsList.findIndex(
+        (obj) => obj.id === searchParams.get("v")
+      );
+      if (getCommentId !== -1) {
+        setCommentId(getCommentId);
+      }
+    }
+  }, []);
 
   useEffect(() => {
     dispatch(closeNav());
@@ -87,6 +103,46 @@ const WatchPage = () => {
     } else {
       alert("Already added");
     }
+  };
+
+  const addNewComment = () => {
+    if (commentsList.length === 0) {
+      const newComment = {
+        id: searchParams.get("v"),
+        comment: [userComment],
+      };
+      dispatch(addComment(newComment));
+    } else {
+      const isCommentPresent = commentsList.filter(
+        (item) => item.id === searchParams.get("v")
+      );
+      if (isCommentPresent.length > 0) {
+        const newComment = {
+          id: searchParams.get("v"),
+          comment: userComment,
+        };
+        dispatch(updateComment(newComment));
+      } else {
+        const newComment = {
+          id: searchParams.get("v"),
+          comment: [userComment],
+        };
+        dispatch(addComment(newComment));
+      }
+    }
+    if (commentsList.length > 0) {
+      const getCommentId = commentsList.findIndex(
+        (obj) => obj.id === searchParams.get("v")
+      );
+      if (getCommentId !== -1) {
+        setCommentId(getCommentId);
+      } else {
+        setCommentId(commentsList.length);
+      }
+    } else {
+      setCommentId(0);
+    }
+    setUserComment("");
   };
 
   if (showWatchShimmer) {
@@ -171,6 +227,42 @@ const WatchPage = () => {
           <h1 className="font-bold">
             {captionData?.statistics?.commentCount / 1000}K Comments
           </h1>
+        </div>
+        <div className="m-5">
+          <div className="flex">
+            <FaRegUserCircle size={30} className="ml-1" />
+            <input
+              type="text"
+              placeholder="Add a comment..."
+              className=" ml-4 shadow-md w-full"
+              value={userComment}
+              onChange={(e) => setUserComment(e.target.value)}
+            />
+            <hr />
+          </div>
+          <div className="flex mt-3 float-end">
+            <button type="button" className="bg-slate-300 rounded-lg ml-5 px-2">
+              Cancel
+            </button>
+            <button
+              type="button"
+              className="bg-slate-300 rounded-lg ml-5 px-2"
+              onClick={addNewComment}
+            >
+              Comment
+            </button>
+          </div>
+          <div>
+            {commentId !== null
+              ? commentsList.length !== 0
+                ? commentsList[commentId].comment.length > 0
+                  ? commentsList[commentId].comment.map((eachComm) => (
+                      <NewComment comment={eachComm} />
+                    ))
+                  : ""
+                : ""
+              : ""}
+          </div>
         </div>
         <div>
           {commentsData.map((eachComment) => (
