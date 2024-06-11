@@ -24,3 +24,9 @@ export const youtubeShorts =
 
 export const videoDataById =
   "https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&id=";
+
+export const liveVideoChat =
+  "https://www.googleapis.com/youtube/v3/liveBroadcasts?part=snippet&id=";
+
+export const oauthClientId =
+  "199234305629-3ktdo4t8qr1kk2m98f9qevf361c0sis6.apps.googleusercontent.com";

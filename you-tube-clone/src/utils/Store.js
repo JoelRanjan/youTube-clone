@@ -4,6 +4,7 @@ import cacheSlice from "./cacheSlice";
 import searchSlice from "./searchSlice";
 import watchListSlice from "./watchListSlice";
 import commentsSlice from "./commentsSlice";
+import liveCommentSlice from "./liveCommentSlice";
 
 const store = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ const store = configureStore({
     searchStr: searchSlice,
     watchVideos: watchListSlice,
     comments: commentsSlice,
+    liveComment: liveCommentSlice,
   },
 });
 

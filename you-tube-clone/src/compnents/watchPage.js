@@ -7,6 +7,8 @@ import {
   YOUR_API_KEY,
   youTubeComments,
   videoDataById,
+  liveVideoChat,
+  oauthClientId,
 } from "../utils/constants";
 import { FaRegUserCircle } from "react-icons/fa";
 import { FaBell } from "react-icons/fa";
@@ -23,6 +25,12 @@ import { addToWatchList } from "../utils/watchListSlice";
 import Popup from "reactjs-popup";
 import { addComment, updateComment } from "../utils/commentsSlice";
 import NewComment from "./NewComment";
+import LiveChat from "./LiveChat";
+import {
+  GoogleOAuthProvider,
+  GoogleLogin,
+  useGoogleLogin,
+} from "@react-oauth/google";
 
 const WatchPage = () => {
   const [captionData, setCaptionData] = useState("");
@@ -32,6 +40,7 @@ const WatchPage = () => {
   const [categoryVideoData, setCategoryVideoData] = useState([]);
   const [userComment, setUserComment] = useState("");
   const [commentId, setCommentId] = useState(null);
+  const [token, setToken] = useState(null);
   const [searchParams] = useSearchParams();
   const dispatch = useDispatch();
 
@@ -47,7 +56,30 @@ const WatchPage = () => {
         setCommentId(getCommentId);
       }
     }
+    // login();
+    // fetchLiveComments();
   }, []);
+
+  // for live youtube chat
+  // const login = useGoogleLogin({
+  //   onSuccess: (tokenResponse) => {
+  //     setToken(tokenResponse.access_token);
+  //     console.log(tokenResponse);
+  //   },
+  //   onError: () => {
+  //     console.log("Login Failed");
+  //   },
+  //   clientId: oauthClientId,
+  //   scope: "https://www.googleapis.com/auth/youtube.readonly",
+  // });
+
+  // const fetchLiveComments = async () => {
+  //   const liveComments = await fetch(
+  //     liveVideoChat + searchParams.get("v") + "&key=" + YOUR_API_KEY
+  //   );
+  //   const liveJson = await liveComments.json();
+  //   console.log(liveJson);
+  // };
 
   useEffect(() => {
     dispatch(closeNav());
@@ -68,6 +100,7 @@ const WatchPage = () => {
     setCatId(jsonData.items[0].snippet.categoryId);
     setShowWatchShimmer(false);
     setCaptionData(jsonData.items[0]);
+    console.log(captionData);
     // setTimeout(() => {
     //   fetchVideoSuggestions(catId);
     // }, 1000);
@@ -150,12 +183,13 @@ const WatchPage = () => {
   }
 
   return (
-    <div className="p-4 m-4 flex">
-      <div>
-        <h1>{catId}</h1>
-      </div>
+    <div className="p-4 m-4 flex w-full">
+      {/* <div> for live youtube chat
+        <button onClick={() => login()}>signin</button>
+        <h1>{token}</h1>
+      </div> */}
       <div className="w-4/6">
-        <div className=" rounded-lg ">
+        <div className=" rounded-lg w-full">
           <iframe
             className="rounded-lg"
             width="860"
@@ -173,13 +207,13 @@ const WatchPage = () => {
           ></iframe>
         </div>
         <div>
-          <h1 className="font-bold my-3">{captionData?.snippet?.title}</h1>
+          <h1 className="font-bold my-3 w-96">{captionData?.snippet?.title}</h1>
           <div className="flex">
             <div>
               <FaRegUserCircle size={30} className="ml-1" />
             </div>
             <div>
-              <h1 className="font-semibold ml-2">
+              <h1 className="font-semibold ml-2 w-44">
                 {captionData?.snippet?.channelTitle}
               </h1>
             </div>
@@ -197,7 +231,7 @@ const WatchPage = () => {
             <div className="flex bg-slate-200 rounded-xl px-2 ml-3 pt-1">
               <PiShareFat size={20} />
               <Popup
-                trigger={<p className="ml-2">More options</p>}
+                trigger={<p className="ml-2 w-24">More options</p>}
                 position="right center"
               >
                 <ul className="text-xs  bg-slate-200 rounded-l px-2 ml-3 pt-1">
@@ -265,13 +299,18 @@ const WatchPage = () => {
           </div>
         </div>
         <div>
-          {commentsData.map((eachComment) => (
-            <Comment key={eachComment.id} comment={eachComment} />
-          ))}
+          {captionData.snippet &&
+          captionData.snippet.liveBroadcastContent === "none"
+            ? commentsData.map((eachComment) => (
+                <Comment key={eachComment.id} comment={eachComment} />
+              ))
+            : ""}
         </div>
       </div>
-      <div className="w-2/6">
-        {categoryVideoData &&
+      <div className="w-2/6 ">
+        {captionData.snippet &&
+        captionData.snippet.liveBroadcastContent === "none" ? (
+          categoryVideoData &&
           categoryVideoData.map((eachvid) => (
             <Link
               to={
@@ -280,7 +319,14 @@ const WatchPage = () => {
             >
               <VideoSuggestions videoDetails={eachvid} />
             </Link>
-          ))}
+          ))
+        ) : (
+          <div>
+            <div className="flex">
+              <LiveChat />
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
