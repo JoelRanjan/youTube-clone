@@ -287,12 +287,15 @@ const WatchPage = () => {
             </button>
           </div>
           <div>
-            {commentId !== null
-              ? commentsList.length !== 0
-                ? commentsList[commentId].comment.length > 0
-                  ? commentsList[commentId].comment.map((eachComm) => (
-                      <NewComment comment={eachComm} />
-                    ))
+            {captionData.snippet &&
+            captionData.snippet.liveBroadcastContent === "none"
+              ? commentId !== null
+                ? commentsList.length !== 0
+                  ? commentsList[commentId].comment.length > 0
+                    ? commentsList[commentId].comment.map((eachComm) => (
+                        <NewComment comment={eachComm} />
+                      ))
+                    : ""
                   : ""
                 : ""
               : ""}

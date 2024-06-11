@@ -30,3 +30,5 @@ export const liveVideoChat =
 
 export const oauthClientId =
   "199234305629-3ktdo4t8qr1kk2m98f9qevf361c0sis6.apps.googleusercontent.com";
+
+export const liveMessagesCount = 200;

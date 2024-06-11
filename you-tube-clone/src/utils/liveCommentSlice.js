@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { liveMessagesCount } from "./constants";
 
 const liveComment = createSlice({
   name: "liveComments",
@@ -7,6 +8,7 @@ const liveComment = createSlice({
   },
   reducers: {
     addLiveComment: (state, action) => {
+      state.liveCommentsList.splice(liveMessagesCount, 1);
       state.liveCommentsList.unshift(action.payload);
     },
   },
