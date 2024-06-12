@@ -257,35 +257,52 @@ const WatchPage = () => {
             </div> */}
           </div>
         </div>
-        <div className="mt-4">
-          <h1 className="font-bold">
-            {captionData?.statistics?.commentCount / 1000}K Comments
-          </h1>
-        </div>
+        {captionData.snippet &&
+        captionData.snippet.liveBroadcastContent === "none" ? (
+          <div className="mt-4">
+            <h1 className="font-bold">
+              {captionData?.statistics?.commentCount / 1000}K Comments
+            </h1>
+          </div>
+        ) : (
+          ""
+        )}
+
         <div className="m-5">
-          <div className="flex">
-            <FaRegUserCircle size={30} className="ml-1" />
-            <input
-              type="text"
-              placeholder="Add a comment..."
-              className=" ml-4 shadow-md w-full"
-              value={userComment}
-              onChange={(e) => setUserComment(e.target.value)}
-            />
-            <hr />
-          </div>
-          <div className="flex mt-3 float-end">
-            <button type="button" className="bg-slate-300 rounded-lg ml-5 px-2">
-              Cancel
-            </button>
-            <button
-              type="button"
-              className="bg-slate-300 rounded-lg ml-5 px-2"
-              onClick={addNewComment}
-            >
-              Comment
-            </button>
-          </div>
+          {captionData.snippet &&
+          captionData.snippet.liveBroadcastContent === "none" ? (
+            <div>
+              <div className="flex">
+                <FaRegUserCircle size={30} className="ml-1" />
+                <input
+                  type="text"
+                  placeholder="Add a comment..."
+                  className=" ml-4 shadow-md w-full"
+                  value={userComment}
+                  onChange={(e) => setUserComment(e.target.value)}
+                />
+                <hr />
+              </div>
+              <div className="flex mt-3 float-end">
+                <button
+                  type="button"
+                  className="bg-slate-300 rounded-lg ml-5 px-2"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="button"
+                  className="bg-slate-300 rounded-lg ml-5 px-2"
+                  onClick={addNewComment}
+                >
+                  Comment
+                </button>
+              </div>
+            </div>
+          ) : (
+            ""
+          )}
+
           <div>
             {captionData.snippet &&
             captionData.snippet.liveBroadcastContent === "none"

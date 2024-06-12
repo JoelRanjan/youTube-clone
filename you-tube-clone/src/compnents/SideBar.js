@@ -27,12 +27,12 @@ const SideBar = () => {
     dispatch(searchString(""));
   };
 
-  const showShorts = () => {
-    dispatch(searchString("youtube shorts"));
+  const showSearch = (searchItem) => {
+    dispatch(searchString(searchItem));
   };
 
   return (
-    <div className="m-4 mt-6 sticky top-14">
+    <div className="m-4 mt-6 top-14 w-44">
       {isNavTrue ? (
         <>
           <ul>
@@ -42,14 +42,17 @@ const SideBar = () => {
                 Home
               </li>
             </Link>
-            <li className="flex m-2 cursor-pointer" onClick={showShorts}>
+            <li
+              className="flex m-2 cursor-pointer"
+              onClick={() => showSearch("youtube shorts")}
+            >
               <SiYoutubeshorts size={20} className="mr-3" />
               Shorts
             </li>
-            <li className="flex m-2">
+            {/* <li className="flex m-2">
               <MdSubscriptions size={20} className="mr-3" />
               Subscriptions
-            </li>
+            </li> */}
           </ul>
           <hr />
           <h1 className="font-bold">You {" >"}</h1>
@@ -62,7 +65,7 @@ const SideBar = () => {
               <GoHistory size={20} className="mr-3" />
               History
             </li>
-            <li className="flex m-2">
+            <li className="flex m-2" onClick={() => showSearch("playlists")}>
               <MdOutlinePlaylistPlay size={20} className="mr-3" />
               Playlists
             </li>
@@ -83,6 +86,75 @@ const SideBar = () => {
             <li className="flex m-2">
               <AiOutlineLike size={20} className="mr-3" />
               Liked Videos
+            </li>
+          </ul>
+          <hr />
+          <h1 className="font-bold">Explore</h1>
+          <ul>
+            <li
+              className="flex m-2"
+              onClick={() => showSearch("trending videos")}
+            >
+              <LuUserSquare size={20} className="mr-3" />
+              Trending
+            </li>
+            <li
+              className="flex m-2"
+              onClick={() => showSearch("shopping videos")}
+            >
+              <GoHistory size={20} className="mr-3" />
+              Shopping
+            </li>
+            <li className="flex m-2" onClick={() => showSearch("music videos")}>
+              <MdOutlinePlaylistPlay size={20} className="mr-3" />
+              Music
+            </li>
+            <li
+              className="flex m-2"
+              onClick={() => showSearch("youtube movies")}
+            >
+              <MdOutlineOndemandVideo size={20} className="mr-3" />
+              Movies
+            </li>
+            <li
+              className="flex m-2"
+              onClick={() => showSearch("live videos right now")}
+            >
+              <BiMoviePlay size={20} className="mr-3" />
+              Live
+            </li>
+            <li
+              className="flex m-2"
+              onClick={() => showSearch("gaming videos")}
+            >
+              <FaRegClock size={20} className="mr-3" />
+              Gaming
+            </li>
+            <li className="flex m-2" onClick={() => showSearch("news videos")}>
+              <AiOutlineLike size={20} className="mr-3" />
+              News
+            </li>
+            <li
+              className="flex m-2"
+              onClick={() => showSearch("sports videos")}
+            >
+              <AiOutlineLike size={20} className="mr-3" />
+              Sports
+            </li>
+            <li className="flex m-2" onClick={() => showSearch("courses")}>
+              <AiOutlineLike size={20} className="mr-3" />
+              Courses
+            </li>
+            <li
+              className="flex m-2"
+              onClick={() => showSearch("Fasion and beauty videos")}
+            >
+              <AiOutlineLike size={20} className="mr-3" />
+              Fasion & Beauty
+            </li>
+            <li className="flex m-2" onClick={() => showSearch("podcasts")}>
+              <AiOutlineLike size={20} className="mr-3" />
+              Podcasts
             </li>
           </ul>
           <hr />

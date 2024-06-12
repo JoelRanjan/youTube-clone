@@ -9,6 +9,11 @@ const WatchListPage = () => {
   );
   return (
     <div>
+      <div>
+        <button className="border border-black px-2 m-3">
+          Clear Watchlist
+        </button>
+      </div>
       <div className="flex flex-wrap">
         {watchListItems.map((eachvid) => (
           <Link
