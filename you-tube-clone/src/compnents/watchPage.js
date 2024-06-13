@@ -21,7 +21,12 @@ import VideoShimmerUi from "./videoShimmerUi";
 import { youtubeVideoCategoryById } from "../utils/constants";
 import { Link } from "react-router-dom";
 import VideoSuggestions from "./VideoSuggestions";
-import { addToWatchList } from "../utils/watchListSlice";
+import {
+  addToHistory,
+  addToMoviesList,
+  addToMyVideosList,
+  addToWatchList,
+} from "../utils/watchListSlice";
 import Popup from "reactjs-popup";
 import { addComment, updateComment } from "../utils/commentsSlice";
 import NewComment from "./NewComment";
@@ -40,11 +45,22 @@ const WatchPage = () => {
   const [categoryVideoData, setCategoryVideoData] = useState([]);
   const [userComment, setUserComment] = useState("");
   const [commentId, setCommentId] = useState(null);
-  const [token, setToken] = useState(null);
+  // const [token, setToken] = useState(null);
   const [searchParams] = useSearchParams();
   const dispatch = useDispatch();
 
-  const watchList = useSelector((store) => store.watchVideos.watchListVideos);
+  const watchList = useSelector(
+    (store) => store.watchVideos.watchListVideos.myWatchList
+  );
+  const myVideosList = useSelector(
+    (store) => store.watchVideos.watchListVideos.myvideos
+  );
+  const myMoviesList = useSelector(
+    (store) => store.watchVideos.watchListVideos.myMovies
+  );
+  const myHistory = useSelector(
+    (store) => store.watchVideos.watchListVideos.history
+  );
   const commentsList = useSelector((store) => store.comments.comments);
 
   useEffect(() => {
@@ -85,6 +101,7 @@ const WatchPage = () => {
     dispatch(closeNav());
     fetchCaptions();
     fetchComments();
+    // addToHistoryVideos();
   }, [searchParams]);
 
   useEffect(() => {
@@ -100,7 +117,6 @@ const WatchPage = () => {
     setCatId(jsonData.items[0].snippet.categoryId);
     setShowWatchShimmer(false);
     setCaptionData(jsonData.items[0]);
-    console.log(captionData);
     // setTimeout(() => {
     //   fetchVideoSuggestions(catId);
     // }, 1000);
@@ -122,19 +138,65 @@ const WatchPage = () => {
     setCategoryVideoData(suggData.items);
   };
 
-  const addToWatch = async () => {
+  const videoData = async () => {
     const watchData = await fetch(
       videoDataById + searchParams.get("v") + "&key=" + YOUR_API_KEY
     );
     const watchJsonData = await watchData.json();
+    return watchJsonData;
+  };
+
+  const addToWatch = async () => {
+    // const watchData = await fetch(
+    //   videoDataById + searchParams.get("v") + "&key=" + YOUR_API_KEY
+    // );
+    // const watchJsonData = await watchData.json();
+    const watchJsonData = await videoData();
     const similarData = watchList.filter(
       (item) => item.snippet.title === captionData?.snippet?.title
     );
+    // const similarData = checkSimilarData();
     if (similarData.length === 0) {
       dispatch(addToWatchList(watchJsonData.items));
       alert("Added to watchlist");
     } else {
       alert("Already added");
+    }
+  };
+
+  const addToVideos = async () => {
+    const watchJsonData = await videoData();
+    const similarData = myVideosList.filter(
+      (item) => item.snippet.title === captionData?.snippet?.title
+    );
+    if (similarData.length === 0) {
+      dispatch(addToMyVideosList(watchJsonData.items));
+      alert("Added to My Videos");
+    } else {
+      alert("Already added");
+    }
+  };
+
+  const addToMovies = async () => {
+    const watchJsonData = await videoData();
+    const similarData = myMoviesList.filter(
+      (item) => item.snippet.title === captionData?.snippet?.title
+    );
+    if (similarData.length === 0) {
+      dispatch(addToMoviesList(watchJsonData.items));
+      alert("Added to My Movies");
+    } else {
+      alert("Already added");
+    }
+  };
+
+  const addToHistoryVideos = async () => {
+    const watchJsonData = await videoData();
+    const similarData = myHistory.filter(
+      (item) => item.snippet.title === captionData?.snippet?.title
+    );
+    if (similarData.length === 0) {
+      dispatch(addToHistory(watchJsonData.items));
     }
   };
 
@@ -188,11 +250,11 @@ const WatchPage = () => {
         <button onClick={() => login()}>signin</button>
         <h1>{token}</h1>
       </div> */}
-      <div className="w-4/6">
-        <div className=" rounded-lg w-full">
+      <div className="w-4/6 ml-10">
+        <div className=" rounded-lg w-full ">
           <iframe
             className="rounded-lg"
-            width="860"
+            width="760"
             height="450"
             src={
               "https://www.youtube.com/embed/" +
@@ -238,7 +300,12 @@ const WatchPage = () => {
                   <li className="cursor-pointer" onClick={addToWatch}>
                     <button>{"->"} Add to Watchlist</button>
                   </li>
-                  <li className="cursor-pointer">{"->"} Add to My Videos</li>
+                  <li className="cursor-pointer" onClick={addToVideos}>
+                    {"->"} Add to My Videos
+                  </li>
+                  <li className="cursor-pointer" onClick={addToMovies}>
+                    {"->"} Add to My Movies
+                  </li>
                   {/* <li>Add to My Movies</li> */}
                 </ul>
               </Popup>

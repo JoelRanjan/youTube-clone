@@ -20,6 +20,15 @@ const SideBar = () => {
   const watchListItems = useSelector(
     (store) => store.watchVideos.watchListVideos
   );
+  const myVideosItems = useSelector(
+    (store) => store.watchVideos.watchListVideos.myvideos
+  );
+
+  const myMoviesItems = useSelector(
+    (store) => store.watchVideos.watchListVideos.myMovies
+  );
+
+  console.log(myVideosItems);
 
   const dispatch = useDispatch();
 
@@ -32,9 +41,9 @@ const SideBar = () => {
   };
 
   return (
-    <div className="m-4 mt-6 top-14 w-44">
+    <div className="ml-2 mt-6 top-14">
       {isNavTrue ? (
-        <>
+        <div className="w-40">
           <ul>
             <Link to="/">
               <li className="flex m-2" onClick={setHome}>
@@ -61,32 +70,41 @@ const SideBar = () => {
               <LuUserSquare size={20} className="mr-3" />
               Your Channel
             </li>
-            <li className="flex m-2">
-              <GoHistory size={20} className="mr-3" />
-              History
-            </li>
+            {/* <Link to="/history">
+              <li className="flex m-2">
+                <GoHistory size={20} className="mr-3" />
+                History
+              </li>
+            </Link> */}
             <li className="flex m-2" onClick={() => showSearch("playlists")}>
               <MdOutlinePlaylistPlay size={20} className="mr-3" />
               Playlists
             </li>
-            <li className="flex m-2">
-              <MdOutlineOndemandVideo size={20} className="mr-3" />
-              Your Videos
-            </li>
-            <li className="flex m-2">
-              <BiMoviePlay size={20} className="mr-3" />
-              Your Movies
-            </li>
+            <Link to="/myVideos">
+              <li className="flex m-2">
+                <MdOutlineOndemandVideo size={20} className="mr-3" />
+                Your Videos
+                <p className="text-xs">({myVideosItems.length})</p>
+              </li>
+            </Link>
+            <Link to="/myMovies">
+              <li className="flex m-2">
+                <BiMoviePlay size={20} className="mr-3" />
+                Your Movies
+                <p className="text-xs">({myMoviesItems.length})</p>
+              </li>
+            </Link>
             <Link to="/watchList">
               <li className="flex m-2 cursor-pointer">
                 <FaRegClock size={20} className="mr-3" />
-                Watch Later<p className="text-xs">({watchListItems.length})</p>
+                Watch Later
+                <p className="text-xs">({watchListItems.myWatchList.length})</p>
               </li>
             </Link>
-            <li className="flex m-2">
+            {/* <li className="flex m-2">
               <AiOutlineLike size={20} className="mr-3" />
               Liked Videos
-            </li>
+            </li> */}
           </ul>
           <hr />
           <h1 className="font-bold">Explore</h1>
@@ -158,7 +176,7 @@ const SideBar = () => {
             </li>
           </ul>
           <hr />
-        </>
+        </div>
       ) : (
         <>
           <ul>

@@ -86,8 +86,8 @@ function Header() {
         </div>
       </div>
       <div className="flex m-4">
-        <RiVideoAddLine size={30} className="ml-5" />
-        <IoIosNotificationsOutline size={30} className="ml-5" />
+        {/* <RiVideoAddLine size={30} className="ml-5" />
+        <IoIosNotificationsOutline size={30} className="ml-5" /> */}
         <FaRegUserCircle size={30} className="ml-5" />
       </div>
     </div>

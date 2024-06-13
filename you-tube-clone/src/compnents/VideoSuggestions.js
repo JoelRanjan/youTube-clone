@@ -3,7 +3,7 @@ import React from "react";
 const VideoSuggestions = ({ videoDetails }) => {
   const { snippet, statistics } = videoDetails;
   return (
-    <div className=" m-2 flex hover:shadow-lg">
+    <div className=" m-2 px-3 flex hover:shadow-lg">
       <div>
         <img
           src={snippet.thumbnails.medium.url}

@@ -1,12 +1,12 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import VideoContainer from "./VideoContainer";
 
-const WatchListPage = () => {
+const History = () => {
   const navigate = useNavigate();
-  const watchListItems = useSelector(
-    (store) => store.watchVideos.watchListVideos.myWatchList
+  const myHistory = useSelector(
+    (store) => store.watchVideos.watchListVideos.history
   );
 
   const toNavigate = (str) => {
@@ -15,18 +15,10 @@ const WatchListPage = () => {
   return (
     <div>
       <div>
-        <button className="border border-black px-2 m-3">
-          Clear Watchlist
-        </button>
+        <button className="border border-black px-2 m-3">Clear HIstory</button>
       </div>
       <div className="flex flex-wrap">
-        {watchListItems.map((eachvid) => (
-          // <Link
-          //   to={
-          // "watch?v=" +
-          // (eachvid.id.videoId ? eachvid.id.videoId : eachvid.id)
-          //   }
-          // >
+        {myHistory.map((eachvid) => (
           <div
             onClick={() =>
               toNavigate(
@@ -37,12 +29,10 @@ const WatchListPage = () => {
           >
             <VideoContainer videoDetails={eachvid} />
           </div>
-
-          // </Link>
         ))}
       </div>
     </div>
   );
 };
 
-export default WatchListPage;
+export default History;

@@ -9,6 +9,9 @@ import WatchPage from "./compnents/watchPage";
 import WatchListPage from "./compnents/WatchListPage";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import { oauthClientId } from "./utils/constants";
+import MyVideos from "./compnents/MyVideos";
+import MyMovies from "./compnents/MyMovies";
+import History from "./compnents/History";
 
 function App() {
   const appRouter = createBrowserRouter([
@@ -27,6 +30,18 @@ function App() {
         {
           path: "watchList",
           element: <WatchListPage />,
+        },
+        {
+          path: "myVideos",
+          element: <MyVideos />,
+        },
+        {
+          path: "myMovies",
+          element: <MyMovies />,
+        },
+        {
+          path: "history",
+          element: <History />,
         },
       ],
     },
