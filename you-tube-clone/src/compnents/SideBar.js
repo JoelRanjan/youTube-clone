@@ -7,6 +7,7 @@ import {
   MdOutlinePlaylistPlay,
   MdOutlineOndemandVideo,
   MdSubscriptions,
+  MdOutlineShoppingBag,
 } from "react-icons/md";
 import { BiMoviePlay } from "react-icons/bi";
 import { FaRegClock } from "react-icons/fa";
@@ -14,6 +15,9 @@ import { AiOutlineLike } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { searchString } from "../utils/searchSlice";
+import { ImFire } from "react-icons/im";
+import { IoMdMusicalNote } from "react-icons/io";
+import { CgLivePhoto } from "react-icons/cg";
 
 const SideBar = () => {
   const isNavTrue = useSelector((store) => store.navToggle.isNavOpen);
@@ -113,18 +117,18 @@ const SideBar = () => {
               className="flex m-2"
               onClick={() => showSearch("trending videos")}
             >
-              <LuUserSquare size={20} className="mr-3" />
+              <ImFire size={20} className="mr-3" />
               Trending
             </li>
             <li
               className="flex m-2"
               onClick={() => showSearch("shopping videos")}
             >
-              <GoHistory size={20} className="mr-3" />
+              <MdOutlineShoppingBag size={20} className="mr-3" />
               Shopping
             </li>
             <li className="flex m-2" onClick={() => showSearch("music videos")}>
-              <MdOutlinePlaylistPlay size={20} className="mr-3" />
+              <IoMdMusicalNote size={20} className="mr-3" />
               Music
             </li>
             <li
@@ -138,7 +142,7 @@ const SideBar = () => {
               className="flex m-2"
               onClick={() => showSearch("live videos right now")}
             >
-              <BiMoviePlay size={20} className="mr-3" />
+              <CgLivePhoto size={20} className="mr-3" />
               Live
             </li>
             <li
