@@ -296,14 +296,23 @@ const WatchPage = () => {
                 trigger={<p className="ml-2 w-24">More options</p>}
                 position="right center"
               >
-                <ul className="text-xs  bg-slate-200 rounded-l px-2 ml-3 pt-1">
-                  <li className="cursor-pointer" onClick={addToWatch}>
+                <ul className="text-xs ">
+                  <li
+                    className="cursor-pointer  bg-slate-200 rounded-l px-2 ml-3 pt-1"
+                    onClick={addToWatch}
+                  >
                     <button>{"->"} Add to Watchlist</button>
                   </li>
-                  <li className="cursor-pointer" onClick={addToVideos}>
+                  <li
+                    className="cursor-pointer  bg-slate-200 rounded-l px-2 my-1 ml-3 pt-1"
+                    onClick={addToVideos}
+                  >
                     {"->"} Add to My Videos
                   </li>
-                  <li className="cursor-pointer" onClick={addToMovies}>
+                  <li
+                    className="cursor-pointer  bg-slate-200 rounded-l px-2 ml-3 pt-1"
+                    onClick={addToMovies}
+                  >
                     {"->"} Add to My Movies
                   </li>
                   {/* <li>Add to My Movies</li> */}

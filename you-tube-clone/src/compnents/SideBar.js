@@ -1,13 +1,14 @@
 import React from "react";
 import { FaHome } from "react-icons/fa";
-import { SiYoutubeshorts } from "react-icons/si";
+import { SiYoutubeshorts, SiYoutubegaming } from "react-icons/si";
 import { LuUserSquare } from "react-icons/lu";
-import { GoHistory } from "react-icons/go";
+import { GoHistory, GoTrophy, GoLightBulb } from "react-icons/go";
 import {
   MdOutlinePlaylistPlay,
   MdOutlineOndemandVideo,
   MdSubscriptions,
   MdOutlineShoppingBag,
+  MdPodcasts,
 } from "react-icons/md";
 import { BiMoviePlay } from "react-icons/bi";
 import { FaRegClock } from "react-icons/fa";
@@ -18,6 +19,7 @@ import { searchString } from "../utils/searchSlice";
 import { ImFire } from "react-icons/im";
 import { IoMdMusicalNote } from "react-icons/io";
 import { CgLivePhoto } from "react-icons/cg";
+import { LiaNewspaperSolid } from "react-icons/lia";
 
 const SideBar = () => {
   const isNavTrue = useSelector((store) => store.navToggle.isNavOpen);
@@ -149,33 +151,33 @@ const SideBar = () => {
               className="flex m-2"
               onClick={() => showSearch("gaming videos")}
             >
-              <FaRegClock size={20} className="mr-3" />
+              <SiYoutubegaming size={20} className="mr-3" />
               Gaming
             </li>
             <li className="flex m-2" onClick={() => showSearch("news videos")}>
-              <AiOutlineLike size={20} className="mr-3" />
+              <LiaNewspaperSolid size={20} className="mr-3" />
               News
             </li>
             <li
               className="flex m-2"
               onClick={() => showSearch("sports videos")}
             >
-              <AiOutlineLike size={20} className="mr-3" />
+              <GoTrophy size={20} className="mr-3" />
               Sports
             </li>
             <li className="flex m-2" onClick={() => showSearch("courses")}>
-              <AiOutlineLike size={20} className="mr-3" />
+              <GoLightBulb size={20} className="mr-3" />
               Courses
             </li>
             <li
               className="flex m-2"
               onClick={() => showSearch("Fasion and beauty videos")}
             >
-              <AiOutlineLike size={20} className="mr-3" />
+              <MdOutlineShoppingBag size={20} className="mr-3" />
               Fasion & Beauty
             </li>
             <li className="flex m-2" onClick={() => showSearch("podcasts")}>
-              <AiOutlineLike size={20} className="mr-3" />
+              <MdPodcasts size={20} className="mr-3" />
               Podcasts
             </li>
           </ul>
