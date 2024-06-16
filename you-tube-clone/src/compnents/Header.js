@@ -8,7 +8,7 @@ import { useDispatch } from "react-redux";
 import { toggleNav } from "../utils/navSlice";
 import { YOUTUBE_SEARCH_API } from "../utils/constants";
 import { searchString } from "../utils/searchSlice";
-import { Link } from "react-router-dom";
+import Popup from "reactjs-popup";
 
 function Header() {
   const [searchValue, setSearchValue] = useState("");
@@ -88,7 +88,25 @@ function Header() {
       <div className="flex m-4">
         {/* <RiVideoAddLine size={30} className="ml-5" />
         <IoIosNotificationsOutline size={30} className="ml-5" /> */}
-        <FaRegUserCircle size={30} className="ml-5" />
+        <Popup
+          trigger={
+            <button>
+              {" "}
+              <FaRegUserCircle size={30} className="ml-5" />{" "}
+            </button>
+          }
+          position="left end"
+        >
+          <div className="flex bg-slate-100 p-3 rounded-lg">
+            <div>
+              <FaRegUserCircle size={30} className="mr-5" />
+            </div>
+            <div>
+              <h1>Joel Ranjan</h1>
+              <h1>@joelranjan009@gmail.com</h1>
+            </div>
+          </div>
+        </Popup>
       </div>
     </div>
   );

@@ -11,7 +11,7 @@ import {
   MdPodcasts,
 } from "react-icons/md";
 import { BiMoviePlay } from "react-icons/bi";
-import { FaRegClock } from "react-icons/fa";
+import { FaRegClock, FaRegUserCircle } from "react-icons/fa";
 import { AiOutlineLike } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
@@ -20,6 +20,7 @@ import { ImFire } from "react-icons/im";
 import { IoMdMusicalNote } from "react-icons/io";
 import { CgLivePhoto } from "react-icons/cg";
 import { LiaNewspaperSolid } from "react-icons/lia";
+import Popup from "reactjs-popup";
 
 const SideBar = () => {
   const isNavTrue = useSelector((store) => store.navToggle.isNavOpen);
@@ -33,8 +34,6 @@ const SideBar = () => {
   const myMoviesItems = useSelector(
     (store) => store.watchVideos.watchListVideos.myMovies
   );
-
-  console.log(myVideosItems);
 
   const dispatch = useDispatch();
 
@@ -72,10 +71,29 @@ const SideBar = () => {
           <hr />
           <h1 className="font-bold">You {" >"}</h1>
           <ul>
-            <li className="flex m-2">
+            {/* <li className="flex m-2">
               <LuUserSquare size={20} className="mr-3" />
               Your Channel
-            </li>
+            </li> */}
+            <Popup
+              trigger={
+                <li className="flex m-2 cursor-pointer">
+                  <LuUserSquare size={20} className="mr-3" />
+                  Your Channel
+                </li>
+              }
+              position="right center"
+            >
+              <div className="flex bg-slate-100 p-3 rounded-lg">
+                <div>
+                  <FaRegUserCircle size={30} className="mr-5" />
+                </div>
+                <div>
+                  <h1>Joel Ranjan</h1>
+                  <h1>@joelranjan009@gmail.com</h1>
+                </div>
+              </div>
+            </Popup>
             {/* <Link to="/history">
               <li className="flex m-2">
                 <GoHistory size={20} className="mr-3" />

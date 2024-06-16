@@ -301,19 +301,19 @@ const WatchPage = () => {
                     className="cursor-pointer  bg-slate-200 rounded-l px-2 ml-3 pt-1"
                     onClick={addToWatch}
                   >
-                    <button>{"->"} Add to Watchlist</button>
+                    <button>Add to Watchlist</button>
                   </li>
                   <li
                     className="cursor-pointer  bg-slate-200 rounded-l px-2 my-1 ml-3 pt-1"
                     onClick={addToVideos}
                   >
-                    {"->"} Add to My Videos
+                    Add to My Videos
                   </li>
                   <li
                     className="cursor-pointer  bg-slate-200 rounded-l px-2 ml-3 pt-1"
                     onClick={addToMovies}
                   >
-                    {"->"} Add to My Movies
+                    Add to My Movies
                   </li>
                   {/* <li>Add to My Movies</li> */}
                 </ul>
