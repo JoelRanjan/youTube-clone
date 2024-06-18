@@ -63,18 +63,10 @@ const SideBar = () => {
               <SiYoutubeshorts size={20} className="mr-3" />
               Shorts
             </li>
-            {/* <li className="flex m-2">
-              <MdSubscriptions size={20} className="mr-3" />
-              Subscriptions
-            </li> */}
           </ul>
           <hr />
           <h1 className="font-bold">You {" >"}</h1>
           <ul>
-            {/* <li className="flex m-2">
-              <LuUserSquare size={20} className="mr-3" />
-              Your Channel
-            </li> */}
             <Popup
               trigger={
                 <li className="flex m-2 cursor-pointer">
@@ -125,10 +117,6 @@ const SideBar = () => {
                 <p className="text-xs">({watchListItems.myWatchList.length})</p>
               </li>
             </Link>
-            {/* <li className="flex m-2">
-              <AiOutlineLike size={20} className="mr-3" />
-              Liked Videos
-            </li> */}
           </ul>
           <hr />
           <h1 className="font-bold">Explore</h1>
