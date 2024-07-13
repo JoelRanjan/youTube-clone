@@ -122,67 +122,79 @@ const SideBar = () => {
           <h1 className="font-bold">Explore</h1>
           <ul>
             <li
-              className="flex m-2"
+              className="flex m-2 cursor-pointer"
               onClick={() => showSearch("trending videos")}
             >
               <ImFire size={20} className="mr-3" />
               Trending
             </li>
             <li
-              className="flex m-2"
+              className="flex m-2 cursor-pointer"
               onClick={() => showSearch("shopping videos")}
             >
               <MdOutlineShoppingBag size={20} className="mr-3" />
               Shopping
             </li>
-            <li className="flex m-2" onClick={() => showSearch("music videos")}>
+            <li
+              className="flex m-2 cursor-pointer"
+              onClick={() => showSearch("music videos")}
+            >
               <IoMdMusicalNote size={20} className="mr-3" />
               Music
             </li>
             <li
-              className="flex m-2"
+              className="flex m-2 cursor-pointer"
               onClick={() => showSearch("youtube movies")}
             >
               <MdOutlineOndemandVideo size={20} className="mr-3" />
               Movies
             </li>
             <li
-              className="flex m-2"
+              className="flex m-2 cursor-pointer"
               onClick={() => showSearch("live videos right now")}
             >
               <CgLivePhoto size={20} className="mr-3" />
               Live
             </li>
             <li
-              className="flex m-2"
+              className="flex m-2 cursor-pointer"
               onClick={() => showSearch("gaming videos")}
             >
               <SiYoutubegaming size={20} className="mr-3" />
               Gaming
             </li>
-            <li className="flex m-2" onClick={() => showSearch("news videos")}>
+            <li
+              className="flex m-2 cursor-pointer"
+              onClick={() => showSearch("news videos")}
+            >
               <LiaNewspaperSolid size={20} className="mr-3" />
               News
             </li>
             <li
-              className="flex m-2"
+              className="flex m-2 cursor-pointer"
               onClick={() => showSearch("sports videos")}
             >
               <GoTrophy size={20} className="mr-3" />
               Sports
             </li>
-            <li className="flex m-2" onClick={() => showSearch("courses")}>
+            <li
+              className="flex m-2 cursor-pointer"
+              onClick={() => showSearch("courses")}
+            >
               <GoLightBulb size={20} className="mr-3" />
               Courses
             </li>
             <li
-              className="flex m-2"
+              className="flex m-2 cursor-pointer"
               onClick={() => showSearch("Fasion and beauty videos")}
             >
               <MdOutlineShoppingBag size={20} className="mr-3" />
               Fasion & Beauty
             </li>
-            <li className="flex m-2" onClick={() => showSearch("podcasts")}>
+            <li
+              className="flex m-2 cursor-pointer"
+              onClick={() => showSearch("podcasts")}
+            >
               <MdPodcasts size={20} className="mr-3" />
               Podcasts
             </li>
@@ -191,45 +203,45 @@ const SideBar = () => {
         </div>
       ) : (
         <>
-          <ul>
+          {/* <ul>
             <Link to="/">
-              <li className="flex m-2" onClick={setHome}>
+              <li className="flex m-2 cursor-pointer" onClick={setHome}>
                 <FaHome size={20} className="mr-3" />
               </li>
             </Link>
-            <li className="flex m-2" onClick={setHome}>
+            <li className="flex m-2 cursor-pointer" onClick={setHome}>
               <SiYoutubeshorts size={20} className="mr-3" />
             </li>
-            <li className="flex m-2">
+            <li className="flex m-2 cursor-pointer">
               <MdSubscriptions size={20} className="mr-3" />
             </li>
           </ul>
           <hr />
           <h1 className="font-bold">You {" >"}</h1>
           <ul>
-            <li className="flex m-2">
+            <li className="flex m-2 cursor-pointer">
               <LuUserSquare size={20} className="mr-3" />
             </li>
-            <li className="flex m-2">
+            <li className="flex m-2 cursor-pointer">
               <GoHistory size={20} className="mr-3" />
             </li>
-            <li className="flex m-2">
+            <li className="flex m-2 cursor-pointer">
               <MdOutlinePlaylistPlay size={20} className="mr-3" />
             </li>
-            <li className="flex m-2">
+            <li className="flex m-2 cursor-pointer">
               <MdOutlineOndemandVideo size={20} className="mr-3" />
             </li>
-            <li className="flex m-2">
+            <li className="flex m-2 cursor-pointer">
               <BiMoviePlay size={20} className="mr-3" />
             </li>
-            <li className="flex m-2">
+            <li className="flex m-2 cursor-pointer">
               <FaRegClock size={20} className="mr-3" />
             </li>
-            <li className="flex m-2">
+            <li className="flex m-2 cursor-pointer">
               <AiOutlineLike size={20} className="mr-3" />
             </li>
           </ul>
-          <hr />
+          <hr /> */}
         </>
       )}
     </div>
